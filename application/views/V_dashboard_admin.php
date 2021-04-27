@@ -23,22 +23,22 @@
                 <table class="table mydatatable" id="">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Tanggal</th>
-                            <th scope="col">Group</th>
-                            <th scope="col">Type-WO</th>
-                            <th scope="col">Area</th>
-                            <th scope="col">Pekerjaan</th>
-                            <!-- <th scope="col">Analisis</th> -->
-                            <!-- <th scope="col">Sparepart</th> -->
-                            <!-- <th scope="col">Jam Mulai</th> -->
-                            <!-- <th scope="col">Jam Selesai</th> -->
-                            <th scope="col">Durasi</th>
-                            <!-- <th scope="col">Shift</th> -->
-                            <!-- <th scope="col">Total Person</th> -->
-                            <th scope="col">Teknisi</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Aksi</th>
+                            <th>No</th>
+                            <th>Tanggal</th>
+                            <th>Group</th>
+                            <th>Type-WO</th>
+                            <th>Area</th>
+                            <th>Pekerjaan</th>
+                            <!-- <th >Analisis</th> -->
+                            <!-- <th >Sparepart</th> -->
+                            <!-- <th >Jam Mulai</th> -->
+                            <!-- <th >Jam Selesai</th> -->
+                            <th>Durasi</th>
+                            <!-- <th >Shift</th> -->
+                            <!-- <th >Total Person</th> -->
+                            <th>Teknisi</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,7 +63,9 @@
                                     }
                                     ?></td>
                                 <td>
-                                    <a href="" class="btn btn-info btn-sm" id="detail" data-toggle="modal" data-target="#modalDetail" data-tanggal="<?= $l['tanggal'] ?>" data-grup="<?= $l['grup'] ?>" data-type_wo="<?= $l['type_wo'] ?>" data-area="<?= $l['area'] ?>" data-pekerjaan="<?= $l['pekerjaan'] ?>" data-analisis="<?= $l['analisis'] ?>" data-sparepart="<?= $l['sparepart'] ?>" data-jam_mulai="<?= $l['jam_mulai'] ?>" data-jam_selesai="<?= $l['jam_selesai'] ?>" data-durasi="<?= $l['durasi'] ?>" data-shift="<?= $l['shift'] ?>" data-total_person="<?= $l['total_person'] ?>" data-nama_teknisi="<?= $l['nama_teknisi'] ?>" data-status="<?= $l['status'] ?>">Detail</a>
+                                    <a href="" class="btn btn-info btn-sm" id="detail" data-toggle="modal" data-target="#modalDetail" data-tanggal="<?= $l['tanggal'] ?>" data-grup="<?= $l['grup'] ?>" data-type_wo="<?= $l['type_wo'] ?>" data-area="<?= $l['area'] ?>" data-pekerjaan="<?= $l['pekerjaan'] ?>" data-analisis="<?= $l['analisis'] ?>" data-sparepart="<?= $l['sparepart'] ?>" data-jam_mulai="<?= $l['jam_mulai'] ?>" data-jam_selesai="<?= $l['jam_selesai'] ?>" data-durasi="<?= $l['durasi'] ?>" data-shift="<?= $l['shift'] ?>" data-total_person="<?= $l['total_person'] ?>" data-nama_teknisi="<?= $l['nama_teknisi'] ?>" data-status="<?= $l['status'] ?>"><i class="fas fa-info-circle"></i> Detail</a>
+                                    <hr>
+                                    <a href="<?= base_url('admin/hapuslaporan/')  . $l['id_laporan'] ?>" class="btn btn-danger btn-sm" onclick="javacript:return confirm('Anda yakin menghapus laporan ini?')"><i class="far fa-trash-alt"></i> Hapus</a>
                                 </td>
                                 <!-- <td>Mark</td>
                             <td>Otto</td>
@@ -213,6 +215,18 @@
             position: 'center',
             icon: 'success',
             title: 'Area Baru Berhasil Dibuat',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    </script>
+<?php endif; ?>
+
+<?php if ($this->session->flashdata('berhasil-hapus')) : ?>
+    <script>
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Laporan Berhasil Dihapus',
             showConfirmButton: false,
             timer: 1500
         })

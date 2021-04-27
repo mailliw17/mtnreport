@@ -110,4 +110,13 @@ class Admin extends CI_Controller
 			redirect('admin');
 		}
 	}
+
+	public function hapuslaporan($id_laporan)
+	{
+		$this->M_admin->hapuslaporan($id_laporan);
+
+		//pindah ke halaman landingpage
+		$this->session->set_flashdata('berhasil-hapus', 'oke');
+		redirect('admin');
+	}
 }

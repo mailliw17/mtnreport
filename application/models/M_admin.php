@@ -41,4 +41,9 @@ class M_admin extends CI_Model
     {
         $this->db->insert('area', $data);
     }
+
+    public function hapuslaporan($id_laporan)
+    {
+        $this->db->query("DELETE FROM laporan WHERE id_laporan = '$id_laporan'");
+    }
 }

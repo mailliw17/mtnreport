@@ -1,31 +1,5 @@
 <div class="container">
 
-    <!-- <center class="my-3">
-        <h3>Silahkan cari laporan tertentu</h3>
-        <form action="" method="POST">
-            <div class="form-group form-inline">
-                <div class="col-sm-3">
-                    <div class="form-group form-inline">
-                        <label>Grup</label>
-                        <select name="s_grup" id="s_grup" class="form-control">
-                            <option value="">--SILAHKAN PILIH--</option>
-                            <option value="Mechanical">Mechanical</option>
-                            <option value="Automation">Automation</option>
-                            <option value="Electrical">Electrical</option>
-                            <option value="Civil">Civil</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-sm-4">
-                    <div class="form-group form-inline">
-                        <label>Keyword</label>
-                        <input type="text" class="form-control" id="s_keyword" name="s_keyword" placeholder="Cari Silo, John, Continue, Pipa Bocor..." autocomplete="off">
-                    </div>
-                </div>
-        </form>
-    </center> -->
-
     <div class="data my-3">
         <div class="table-responsive">
             <table class="table mydatatable" id="">
@@ -153,35 +127,6 @@
 
 <script src="<?= base_url() ?>vendor/jquery/jquery.min.js"></script>
 <script>
-    //AJAX live search 
-    // $(document).ready(function() {
-    //     load_data();
-
-    //     function load_data(grup, keyword) {
-    //         $.ajax({
-    //             method: "POST",
-    //             url: "<?= base_url() ?>teknisi/tampilData",
-    //             data: {
-    //                 grup: grup,
-    //                 keyword: keyword
-    //             },
-    //             success: function(hasil) {
-    //                 $('.data').html(hasil);
-    //             }
-    //         });
-    //     }
-    //     $('#s_keyword').keyup(function() {
-    //         var grup = $("#s_grup").val();
-    //         var keyword = $("#s_keyword").val();
-    //         load_data(grup, keyword);
-    //     });
-    //     $('#grup').change(function() {
-    //         var grup = $("#grup").val();
-    //         var keyword = $("#s_keyword").val();
-    //         load_data(grup, keyword);
-    //     });
-    // });
-
     $(document).ready(function() {
         $(document).on('click', '#detail', function() {
             // var tanggal = $(this).data('tanggal');
