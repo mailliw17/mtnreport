@@ -9,17 +9,28 @@
 </footer> -->
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
 <script src="<?= base_url() ?>vendor/jquery/jquery.min.js"></script>
 <script src="<?= base_url() ?>vendor/jquery/popper.min.js"></script>
 <script src="<?= base_url() ?>vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="<?= base_url() ?>vendor/fontawesome/js/all.min.js"></script>
 <script src="<?= base_url() ?>vendor/datatables/jquery.dataTables.min.js"></script>
-<!-- <script src="<?= base_url() ?>vendor/datepicker/jquery-ui.js"></script> -->
-<!-- <script>
-    $(function() {
-        $("#datepicker").datepicker();
-    });
-</script> -->
+
+<!-- Script For PWA -->
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+            .then(function(registration) {
+                console.log('Registration successful, scope is:', registration.scope);
+            })
+            .catch(function(error) {
+                console.log('Service worker registration failed, error:', error);
+            });
+    }
+</script>
+
+
+
 <script>
     $('.mydatatable').DataTable();
 </script>
