@@ -64,7 +64,7 @@
 
         <div class="form-group">
             <label for="exampleFormControlInput1">Sparepart</label>
-            <input type="text" class="form-control" id="sparepart" name="sparepart" autocomplete="off">
+            <input type="text" class="form-control" id="sparepart" name="sparepart" autocomplete="off" required>
         </div>
 
         <div class="form-row">

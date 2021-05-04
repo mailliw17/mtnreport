@@ -21,10 +21,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |
 | If you need to allow multiple domains, remember that this file is still
 | a PHP script and you can easily do that on your own.
-|
+| 
 */
 // Please change the base_url follow the localhost / IP local / https ngrok
-$config['base_url'] = 'https://8e3c782e4278.ngrok.io/mtnreport';
+$config['base_url'] = 'https://localhost/mtnreport';
 
 /*
 |--------------------------------------------------------------------------

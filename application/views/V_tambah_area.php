@@ -10,6 +10,7 @@
             </div>
             <div class="col-md-6">
                 <input type="text" class="form-control" id="area_baru" name="area_baru" autocomplete="off" required autofocus>
+                <?= form_error('area_baru', ' <small class="text-danger pl-3">', '</small>');  ?>
             </div>
             <div class="col-md-4">
                 <button type="submit" class="btn btn-primary">Tambahkan</button>
