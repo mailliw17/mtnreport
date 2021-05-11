@@ -39,6 +39,8 @@
                             <th>Teknisi</th>
                             <th>Status</th>
                             <th>Aksi</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,9 +65,16 @@
                                     }
                                     ?></td>
                                 <td>
-                                    <a href="" class="btn btn-info btn-sm" id="detail" data-toggle="modal" data-target="#modalDetail" data-tanggal="<?= $l['tanggal'] ?>" data-grup="<?= $l['grup'] ?>" data-type_wo="<?= $l['type_wo'] ?>" data-area="<?= $l['area'] ?>" data-pekerjaan="<?= $l['pekerjaan'] ?>" data-analisis="<?= $l['analisis'] ?>" data-sparepart="<?= $l['sparepart'] ?>" data-jam_mulai="<?= $l['jam_mulai'] ?>" data-jam_selesai="<?= $l['jam_selesai'] ?>" data-durasi="<?= $l['durasi'] ?>" data-shift="<?= $l['shift'] ?>" data-total_person="<?= $l['total_person'] ?>" data-nama_teknisi="<?= $l['nama_teknisi'] ?>" data-status="<?= $l['status'] ?>"><i class="fas fa-info-circle"></i> Detail</a>
+                                    <a href="" class="btn btn-info btn-sm" id="detail" data-toggle="modal" data-target="#modalDetail" data-tanggal="<?= $l['tanggal'] ?>" data-grup="<?= $l['grup'] ?>" data-type_wo="<?= $l['type_wo'] ?>" data-area="<?= $l['area'] ?>" data-pekerjaan="<?= $l['pekerjaan'] ?>" data-analisis="<?= $l['analisis'] ?>" data-sparepart="<?= $l['sparepart'] ?>" data-jam_mulai="<?= $l['jam_mulai'] ?>" data-jam_selesai="<?= $l['jam_selesai'] ?>" data-durasi="<?= $l['durasi'] ?>" data-shift="<?= $l['shift'] ?>" data-total_person="<?= $l['total_person'] ?>" data-nama_teknisi="<?= $l['nama_teknisi'] ?>" data-made_by="<?= $l['made_by'] ?>" data-status="<?= $l['status'] ?>"><i class="fas fa-info-circle"></i> Detail</a>
                                     <hr>
+
+                                </td>
+                                <td>
                                     <a href="<?= base_url('admin/hapuslaporan/')  . $l['id_laporan'] ?>" class="btn btn-danger btn-sm" onclick="javacript:return confirm('Anda yakin menghapus laporan ini?')"><i class="far fa-trash-alt"></i> Hapus</a>
+                                </td>
+
+                                <td>
+                                    <a href="<?= base_url('admin/editlaporan/')  . $l['id_laporan'] ?>" class="btn btn-warning btn-sm"><i class="far fa-edit"></i> Edit</a>
                                 </td>
                                 <!-- <td>Mark</td>
                             <td>Otto</td>
@@ -154,7 +163,10 @@
                             <th>Total Person</th>
                             <td> <span id="total_person"></span> </td>
                         </tr>
-
+                        <tr>
+                            <th>Dilaporkan</th>
+                            <td> <span id="made_by"></span> </td>
+                        </tr>
                         <tr>
                             <th>Status</th>
                             <td> <span id="status"></span> </td>
@@ -188,6 +200,7 @@
             var shift = $(this).data('shift');
             var total_person = $(this).data('total_person');
             var nama_teknisi = $(this).data('nama_teknisi');
+            var made_by = $(this).data('made_by');
             var status = $(this).data('status');
             // $('#tanggal').text(tanggal);
             $('#grup').text(grup);
@@ -202,6 +215,7 @@
             $('#shift').text(shift);
             $('#total_person').text(total_person);
             $('#nama_teknisi').text(nama_teknisi);
+            $('#made_by').text(made_by);
             $('#status').text(status);
         })
     })
@@ -209,24 +223,25 @@
 
 <script src="<?= base_url() ?>vendor/sweetalert.js"></script>
 
-<?php if ($this->session->flashdata('area_baru')) : ?>
+
+<?php if ($this->session->flashdata('berhasil-hapus')) : ?>
     <script>
         Swal.fire({
             position: 'center',
-            icon: 'success',
-            title: 'Area Baru Berhasil Dibuat',
+            icon: 'warning',
+            title: 'Laporan Berhasil Dihapus',
             showConfirmButton: false,
             timer: 1500
         })
     </script>
 <?php endif; ?>
 
-<?php if ($this->session->flashdata('berhasil-hapus')) : ?>
+<?php if ($this->session->flashdata('berhasil-edit')) : ?>
     <script>
         Swal.fire({
             position: 'center',
             icon: 'success',
-            title: 'Laporan Berhasil Dihapus',
+            title: 'Laporan Berhasil Diperbarui',
             showConfirmButton: false,
             timer: 1500
         })

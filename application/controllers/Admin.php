@@ -74,15 +74,16 @@ class Admin extends CI_Controller
 
 	public function tambaharea()
 	{
+		$data['area'] = $this->M_admin->tampilarea();
+
 		$judul['page_title'] = 'Tambah Area';
 		$this->load->view('templates/header', $judul);
-		$this->load->view('V_tambah_area');
+		$this->load->view('V_tambah_area', $data);
 		$this->load->view('templates/footer');
 	}
 
 	public function store_tambaharea()
 	{
-
 		$this->form_validation->set_rules(
 			'area_baru',
 			'Area_baru',
@@ -92,10 +93,12 @@ class Admin extends CI_Controller
 			)
 		);
 
+		// kalau form validation false, langsung kirim tampilarea() lagi
+		$data['area'] = $this->M_admin->tampilarea();
 		if ($this->form_validation->run() == false) {
 			$judul['page_title'] = 'Data Barang';
 			$this->load->view('templates/header', $judul);
-			$this->load->view('V_tambah_area');
+			$this->load->view('V_tambah_area', $data);
 			$this->load->view('templates/footer');
 		} else {
 
@@ -107,16 +110,48 @@ class Admin extends CI_Controller
 
 			//pindah ke halaman landingpage
 			$this->session->set_flashdata('area_baru', 'oke');
-			redirect('admin');
+			redirect('admin/tambaharea');
 		}
+	}
+
+	public function hapusarea($id_area)
+	{
+		$this->M_admin->hapusarea($id_area);
+
+		$this->session->set_flashdata('berhasil-hapus-area', 'oke');
+		redirect('admin/tambaharea');
 	}
 
 	public function hapuslaporan($id_laporan)
 	{
 		$this->M_admin->hapuslaporan($id_laporan);
 
-		//pindah ke halaman landingpage
+
 		$this->session->set_flashdata('berhasil-hapus', 'oke');
 		redirect('admin');
+	}
+
+	public function editlaporan($id_laporan)
+	{
+		$data['laporan'] = $this->M_admin->ambildatalaporan($id_laporan);
+
+		$this->form_validation->set_rules(
+			'nama_teknisi',
+			'Nama_teknisi',
+			'trim|required'
+		);
+
+		if ($this->form_validation->run() == false) {
+			//load tampilannya
+			$judul['page_title'] = 'Ganti password';
+			$this->load->view('templates/header', $judul);
+			$this->load->view('V_edit_laporan_teknisi', $data);
+			$this->load->view('templates/footer');
+		} else {
+			$this->M_admin->editlaporan();
+
+			$this->session->set_flashdata('berhasil-edit', 'oke');
+			redirect('admin');
+		}
 	}
 }

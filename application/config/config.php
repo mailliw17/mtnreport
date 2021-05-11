@@ -24,7 +24,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | 
 */
 // Please change the base_url follow the localhost / IP local / https ngrok
-$config['base_url'] = 'https://localhost/mtnreport';
+$config['base_url'] = 'https://2f46578efd1d.ngrok.io/mtnreport';
 
 /*
 |--------------------------------------------------------------------------
@@ -137,7 +137,7 @@ $config['subclass_prefix'] = 'MY_';
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
 */
-$config['composer_autoload'] = FALSE;
+$config['composer_autoload'] = "vendor/autoload.php";
 
 /*
 |--------------------------------------------------------------------------

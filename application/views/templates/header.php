@@ -16,6 +16,9 @@
     <!-- Data Tables -->
     <link rel="stylesheet" href="<?= base_url() ?>vendor/datatables/jquery.dataTables.min.css">
 
+    <!-- Datepicker -->
+    <link rel="stylesheet" href="<?= base_url() ?>vendor/range-datepicker/daterangepicker.css">
+
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="icon-512.png">
 

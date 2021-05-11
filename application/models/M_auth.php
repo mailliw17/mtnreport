@@ -13,4 +13,26 @@ class M_auth extends CI_Model
         $query = $this->db->insert('users', $data);
         return $query;
     }
+
+    public function getAllAccount()
+    {
+        return $this->db->query("SELECT * FROM users WHERE role = 'Teknisi' ORDER BY id DESC")->result_array();
+    }
+
+    public function hapusakun($id)
+    {
+        $this->db->query("DELETE FROM users WHERE id = '$id'");
+    }
+
+    public function getAccInfo($id)
+    {
+        return $this->db->query("SELECT * FROM users WHERE id='$id' LIMIT 1")->row_array();
+    }
+
+    public function gantipassword($id)
+    {
+
+        $password_hash = md5($this->input->post('passwordBaru1', true));
+        $this->db->query("UPDATE users SET password = '$password_hash' WHERE id = '$id'");
+    }
 }

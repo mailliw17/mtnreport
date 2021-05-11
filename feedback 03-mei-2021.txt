@@ -1,0 +1,15 @@
+Feedback presentasi MTN Report 03-Mei-2021
+
+DONE :
+- fitur register utk admin dan kelola akun
+- fitur edit laporan oleh admin
+- nama pembuat laporan
+- input nama anggota pake checkbox
+- total person otomatis ikut checkbox
+- jam mulai dan jam selesai kasih validasi biar ga terbalik
+- fitur download excel dengan inputan range tanggal
+- kelola area (bisa liat, buat, dan hapus)
+- menu tracking orang cek siapa aja yang belum buat laporan per hari auto pake is_lapor
+- buat fungsi utk reset is_done ke 0 per hari nya
+- rapihin code ikram yang $temendino
+- improvisasi UI agar button lapor tidak dipencet  berulang kali

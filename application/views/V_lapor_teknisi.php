@@ -74,7 +74,7 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="inputPassword4">Jam Selesai</label>
-                <input type="time" class="form-control" id="jam_selesai" name="jam_selesai" value="now" required>
+                <input type="time" class="form-control" id="jam_selesai" oninput="validasi()" name="jam_selesai" required>
             </div>
 
             <div class="form-group col-md-6">
@@ -83,16 +83,19 @@
             </div>
 
             <div class="form-group col-md-6">
-                <label for="inputPassword4">Total Person</label>
-                <input type="number" class="form-control" id="total_person" name="total_person" required>
+                <label for="exampleFormControlSelect2">Nama Teknisi</label>
+                <select multiple class="form-control" id="nama_teknisi" name="nama_teknisi[]" required>
+                    <option value="" disabled>--SILAHKAN PILIH--</option>
+                    <?php
+                    foreach ($nama_teknisi as $nt) : ?>
+                        <option value="<?= $nt['nama'] ?>"><?= $nt['nama'] ?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
 
-            <div class="form-group col-md-6">
-                <label for="inputPassword4">Nama Teknisi</label>
-                <input type="text" class="form-control" id="nama_teknisi" name="nama_teknisi" autocomplete="off" required>
-            </div>
+            <input type="hidden" class="form-control" id="made_by" name="made_by" autocomplete="off" value="<?= $this->session->userdata('nama'); ?>">
 
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-12">
                 <label for="exampleInputEmail1">Status Pekerjaan</label>
                 <select class="form-control" id="status" name="status" required>
                     <option value="">--SILAHKAN PILIH--</option>
@@ -100,18 +103,20 @@
                     <option value="To Be Continue">To Be Continue</option>
                 </select>
             </div>
+
         </div>
 
         <div class="form-group form-check">
             <input type="checkbox" class="form-check-input" id="ceklis" onclick="disabled_tombol(this)">
             <label class="form-check-label" for="exampleCheck1">Laporan yang dibuat sudah betul</label>
         </div>
-        <button type="submit" class="btn btn-primary btn-block mb-4" id="submit_button" disabled>Proses</button>
+        <button type="submit" class="btn btn-primary btn-block mb-4" onclick="matikanTombol()" id="submit_button" disabled>LAPOR</button>
     </form>
 </div>
 
 <script src="<?= base_url() ?>vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript">
+    // untuk mendapatkan durasi waktu
     var start = document.getElementById("jam_mulai").value;
     var end = document.getElementById("jam_selesai").value;
 
@@ -121,7 +126,6 @@
     document.getElementById("jam_selesai").onchange = function() {
         diff(start, end)
     };
-
 
     function diff(start, end) {
         start = document.getElementById("jam_mulai").value; //to update time value in each input bar
@@ -143,28 +147,43 @@
         }
     }
 
+    function matikanTombol() {
+        document.getElementById("submit_button").innerHTML = "Laporan sedang diproses....";
+    }
+
     setInterval(function() {
         document.getElementById("durasi").value = diff(start, end);
-    }, 1000); //to update time every second (1000 is 1 sec interval and function encasing original code you had down here is because setInterval only reads functions) You can change how fast the time updates by lowering the time interval
+    }, 1000);
+    //to update time every second (1000 is 1 sec interval and function encasing original code you had down here is because setInterval only reads functions) You can change how fast the time updates by lowering the time interval
 
-    $(function() {
-        var d = new Date(),
-            h = d.getHours(),
-            m = d.getMinutes();
-        if (h < 10) h = '0' + h;
-        if (m < 10) m = '0' + m;
-        $('input[type="time"][value="now"]').each(function() {
-            $(this).attr({
-                'value': h + ':' + m
-            });
-        });
-    });
+    // $(function() {
+    //     var d = new Date(),
+    //         h = d.getHours(),
+    //         m = d.getMinutes();
+    //     if (h < 10) h = '0' + h;
+    //     if (m < 10) m = '0' + m;
+    //     $('input[type="time"][value="now"]').each(function() {
+    //         $(this).attr({
+    //             'value': h + ':' + m
+    //         });
+    //     });
+    // });
 
     function disabled_tombol(ceklis) {
         if (ceklis.checked) {
             document.getElementById('submit_button').disabled = false;
         } else {
             document.getElementById('submit_button').disabled = true;
+        }
+    }
+
+    // validasi jam mulai dan jam selesai
+    function validasi() {
+        var jm = document.getElementById("jam_mulai").value;
+        var js = document.getElementById("jam_selesai").value;
+        if ((js !== '') && (jm > js)) {
+            alert('Jam kerja tidak sesuai aturan');
+            document.getElementById("jam_selesai").value = '';
         }
     }
 </script>

@@ -29,10 +29,34 @@
     }
 </script>
 
+<!-- Date Range picker -->
+<script src="<?= base_url() ?>vendor/range-datepicker/moment.min.js"></script>
+<script src="<?= base_url() ?>vendor/range-datepicker/daterangepicker.min.js"></script>
+<script>
+    $(function() {
+        $('input[name="range_tanggal"]').daterangepicker({
+            autoUpdateInput: false,
+            locale: {
+                cancelLabel: 'Clear'
+            }
+        });
+
+        $('input[name="range_tanggal"]').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+        });
+
+        $('input[name="range_tanggal"]').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+        });
+    });
+</script>
+
 
 
 <script>
-    $('.mydatatable').DataTable();
+    $('.mydatatable').DataTable({
+
+    });
 </script>
 
 <!-- Modal Menu -->
@@ -48,9 +72,15 @@
             <div class="modal-body table-responsive">
                 <table class="table table-bordered no-margin">
                     <tbody>
+                        <a href="<?= base_url() ?>admin" class="btn btn-success"><i class="fas fa-envelope-open-text"></i> Laporan Keseluruhan</a>
+                        <hr>
                         <a href="<?= base_url() ?>admin/tambaharea" class="btn btn-danger"><i class="far fa-plus-square"></i> Tambah Area</a>
                         <hr>
-                        <a href="<?= base_url() ?>admin" class="btn btn-success"><i class="fas fa-envelope-open-text"></i> Laporan Kerja</a>
+                        <a href="<?= base_url() ?>auth/kelolaakun" class="btn btn-warning"><i class="fas fa-user-friends"></i> Akun Teknisi</a>
+                        <hr>
+                        <a href="<?= base_url() ?>laporan" class="btn btn-info"><i class="fas fa-file-download"></i> Download Laporan</a>
+                        <hr>
+                        <a href="<?= base_url() ?>tracking" class="btn btn-secondary"><i class="fab fa-searchengin"></i> Tracking Teknisi</a>
                     </tbody>
                 </table>
             </div>

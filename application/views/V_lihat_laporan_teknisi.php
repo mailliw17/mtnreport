@@ -16,7 +16,8 @@
                             <td>
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title"><?php echo date("d/M/Y", strtotime($l['tanggal'])); ?> </h5>
+                                        <!-- <p class="card-text">id : <?php echo $l['id_laporan']; ?></p> -->
+                                        <h5 class="card-title"><?php echo date("d/m/Y", strtotime($l['tanggal'])); ?> </h5>
                                         <h5 class="card-title"><?php echo $l['grup']; ?> - <?php echo $l['area']; ?> </h5>
                                         <h6 class="card-subtitle mb-2 text-muted">Teknisi : <?php echo $l['nama_teknisi']; ?></h6>
                                         <p class="card-text">Pekerjaan : <?php echo $l['pekerjaan']; ?></p>
@@ -28,7 +29,8 @@
                                                                 }
                                                                 ?></p>
 
-                                        <a href="" class="btn btn-info btn-sm" id="detail" data-toggle="modal" data-target="#modalDetail" data-tanggal="<?= $l['tanggal'] ?>" data-grup="<?= $l['grup'] ?>" data-type_wo="<?= $l['type_wo'] ?>" data-area="<?= $l['area'] ?>" data-pekerjaan="<?= $l['pekerjaan'] ?>" data-analisis="<?= $l['analisis'] ?>" data-sparepart="<?= $l['sparepart'] ?>" data-jam_mulai="<?= $l['jam_mulai'] ?>" data-jam_selesai="<?= $l['jam_selesai'] ?>" data-durasi="<?= $l['durasi'] ?>" data-shift="<?= $l['shift'] ?>" data-total_person="<?= $l['total_person'] ?>" data-nama_teknisi="<?= $l['nama_teknisi'] ?>" data-status="<?= $l['status'] ?>">Detail</a>
+
+                                        <a href="" class="btn btn-info btn-sm" id="detail" data-toggle="modal" data-target="#modalDetail" data-tanggal="<?= $l['tanggal'] ?>" data-grup="<?= $l['grup'] ?>" data-type_wo="<?= $l['type_wo'] ?>" data-area="<?= $l['area'] ?>" data-pekerjaan="<?= $l['pekerjaan'] ?>" data-analisis="<?= $l['analisis'] ?>" data-sparepart="<?= $l['sparepart'] ?>" data-jam_mulai="<?= $l['jam_mulai'] ?>" data-jam_selesai="<?= $l['jam_selesai'] ?>" data-durasi="<?= $l['durasi'] ?>" data-shift="<?= $l['shift'] ?>" data-total_person="<?= $l['total_person'] ?>" data-nama_teknisi="<?= $l['nama_teknisi'] ?>" data-made_by="<?= $l['made_by'] ?>" data-status="<?= $l['status'] ?>">Detail</a>
                                     </div>
                                 </div>
                             </td>
@@ -110,6 +112,10 @@
                         </tr>
 
                         <tr>
+                            <th>Dilaporkan</th>
+                            <td> <span id="made_by"></span> </td>
+                        </tr>
+                        <tr>
                             <th>Status</th>
                             <td> <span id="status"></span> </td>
                         </tr>
@@ -141,6 +147,7 @@
             var durasi = $(this).data('durasi');
             var shift = $(this).data('shift');
             var total_person = $(this).data('total_person');
+            var made_by = $(this).data('made_by');
             var nama_teknisi = $(this).data('nama_teknisi');
             var status = $(this).data('status');
             // $('#tanggal').text(tanggal);
@@ -156,6 +163,7 @@
             $('#shift').text(shift);
             $('#total_person').text(total_person);
             $('#nama_teknisi').text(nama_teknisi);
+            $('#made_by').text(made_by);
             $('#status').text(status);
         })
     })
