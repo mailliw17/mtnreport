@@ -149,6 +149,7 @@
 
     function matikanTombol() {
         document.getElementById("submit_button").innerHTML = "Laporan sedang diproses....";
+        $("#submit_button").removeClass("btn btn-primary btn-block mb-4").addClass("btn btn-secondary btn-block mb-4");
     }
 
     setInterval(function() {

@@ -24,7 +24,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | 
 */
 // Please change the base_url follow the localhost / IP local / https ngrok
-$config['base_url'] = 'https://2f46578efd1d.ngrok.io/mtnreport';
+$config['base_url'] = 'https://localhost/mtnreport';
 
 /*
 |--------------------------------------------------------------------------
