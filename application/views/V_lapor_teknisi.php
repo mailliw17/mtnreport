@@ -27,6 +27,7 @@
                 <option value="EM">EM</option>
                 <option value="PRO-M">PRO-M</option>
                 <option value="PM">PM</option>
+                <option value="Project">Project</option>
             </select>
         </div>
 
