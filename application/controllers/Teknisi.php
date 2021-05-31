@@ -79,25 +79,25 @@ class teknisi extends CI_Controller
 		$this->M_teknisi->kirimlaporan($data);
 
 		// $dino ambil tanggal terbaru trigger dari tbl laporan (FITUR INI MASIH BUG)
-		// $dino = $this->M_tracking->ambilTanggal();
-		// $hasil_dino = strtotime($dino['updated_at']);
+		$dino = $this->M_tracking->ambilTanggal();
+		$hasil_dino = strtotime($dino['updated_at']);
 
 		// $temendino itu ambil tanggal hari ini
-		// $temendino = date("Y-m-d");
-		// $hasil_temendino = strtotime($temendino);
+		$temendino = date("Y-m-d");
+		$hasil_temendino = strtotime($temendino);
 
 		// $ligamen itu tanggal sekarang - tanggal terbaru trigger dari tbl laporan
-		// $ligamen = $hasil_temendino - $hasil_dino;
+		$ligamen = $hasil_temendino - $hasil_dino;
 
 		// $ligamen itu timestamp, lalu dibagi 3600 detik dan di bagi 24 jam
-		// $ligamen = $ligamen / 3600 / 24;
+		$ligamen = $ligamen / 3600 / 24;
 
 		// kalau udh ada trigger hari baru, langsung reset semua value ke null
-		// if ($ligamen >= 1)
-		// 	$this->M_tracking->resetIsDone();
+		if ($ligamen >= 1)
+			$this->M_tracking->resetIsDone();
 
 		// set 1 ke yang udh lapor hari terbaru dengan tanggal terbaru 
-		// $this->M_tracking->updatesudahlapor($nama_teknisi);
+		$this->M_tracking->updatesudahlapor($nama_teknisi);
 
 		//pindah ke halaman landingpage
 		$this->session->set_flashdata('berhasil', 'ok');

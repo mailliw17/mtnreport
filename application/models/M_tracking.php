@@ -29,7 +29,7 @@ class M_tracking extends CI_Model
         $tokped = count($nama_teknisi);
 
         for ($i = 0; $i < $tokped; $i++) {
-            $this->db->query("UPDATE users SET is_lapor = 1, updated_at = 'CURDATE()' WHERE nama = '$nama_teknisi[$i]'");
+            $this->db->query("UPDATE users SET is_lapor = 1, updated_at = CURDATE() WHERE nama = '$nama_teknisi[$i]'");
         }
     }
 }
