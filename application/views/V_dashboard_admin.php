@@ -65,16 +65,16 @@
                                     }
                                     ?></td>
                                 <td>
-                                    <a href="" class="btn btn-info btn-sm" id="detail" data-toggle="modal" data-target="#modalDetail" data-tanggal="<?= $l['tanggal'] ?>" data-grup="<?= $l['grup'] ?>" data-type_wo="<?= $l['type_wo'] ?>" data-area="<?= $l['area'] ?>" data-pekerjaan="<?= $l['pekerjaan'] ?>" data-analisis="<?= $l['analisis'] ?>" data-sparepart="<?= $l['sparepart'] ?>" data-jam_mulai="<?= $l['jam_mulai'] ?>" data-jam_selesai="<?= $l['jam_selesai'] ?>" data-durasi="<?= $l['durasi'] ?>" data-shift="<?= $l['shift'] ?>" data-total_person="<?= $l['total_person'] ?>" data-nama_teknisi="<?= $l['nama_teknisi'] ?>" data-made_by="<?= $l['made_by'] ?>" data-status="<?= $l['status'] ?>"><i class="fas fa-info-circle"></i> Detail</a>
+                                    <a href="" class="btn btn-info btn-sm" id="detail" data-toggle="modal" data-target="#modalDetail" data-tanggal="<?= $l['tanggal'] ?>" data-grup="<?= $l['grup'] ?>" data-type_wo="<?= $l['type_wo'] ?>" data-area="<?= $l['area'] ?>" data-pekerjaan="<?= $l['pekerjaan'] ?>" data-analisis="<?= $l['analisis'] ?>" data-sparepart="<?= $l['sparepart'] ?>" data-jam_mulai="<?= $l['jam_mulai'] ?>" data-jam_selesai="<?= $l['jam_selesai'] ?>" data-durasi="<?= $l['durasi'] ?>" data-shift="<?= $l['shift'] ?>" data-total_person="<?= $l['total_person'] ?>" data-nama_teknisi="<?= $l['nama_teknisi'] ?>" data-made_by="<?= $l['made_by'] ?>" data-status="<?= $l['status'] ?>" data-photo="<?= $l['photo'] ?>"><i class="fas fa-info-circle"></i></a>
                                     <hr>
 
                                 </td>
                                 <td>
-                                    <a href="<?= base_url('admin/hapuslaporan/')  . $l['id_laporan'] ?>" class="btn btn-danger btn-sm" onclick="javacript:return confirm('Anda yakin menghapus laporan ini?')"><i class="far fa-trash-alt"></i> Hapus</a>
+                                    <a href="<?= base_url('admin/hapuslaporan/')  . $l['id_laporan'] ?>" class="btn btn-danger btn-sm" onclick="javacript:return confirm('Anda yakin menghapus laporan ini?')"><i class="far fa-trash-alt"></i></a>
                                 </td>
 
                                 <td>
-                                    <a href="<?= base_url('admin/editlaporan/')  . $l['id_laporan'] ?>" class="btn btn-warning btn-sm"><i class="far fa-edit"></i> Edit</a>
+                                    <a href="<?= base_url('admin/editlaporan/')  . $l['id_laporan'] ?>" class="btn btn-warning btn-sm"><i class="far fa-edit"></i></a>
                                 </td>
                                 <!-- <td>Mark</td>
                             <td>Otto</td>
@@ -171,6 +171,13 @@
                             <th>Status</th>
                             <td> <span id="status"></span> </td>
                         </tr>
+                        <tr>
+                            <th>Photo</th>
+                            <td>
+                                <!-- image load dynamicly with javascript -->
+                                <img src="" id="photo" alt="" class="img-fluid img-thumbnail" style="max-width: 500px; max-height: 500px;">
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -202,6 +209,7 @@
             var nama_teknisi = $(this).data('nama_teknisi');
             var made_by = $(this).data('made_by');
             var status = $(this).data('status');
+            var photo = $(this).data('photo');
             // $('#tanggal').text(tanggal);
             $('#grup').text(grup);
             $('#type_wo').text(type_wo);
@@ -217,6 +225,7 @@
             $('#nama_teknisi').text(nama_teknisi);
             $('#made_by').text(made_by);
             $('#status').text(status);
+            document.getElementById("photo").src = "<?= base_url(); ?>uploads/photo/" + photo;
         })
     })
 </script>

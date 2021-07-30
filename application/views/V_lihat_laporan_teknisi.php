@@ -1,11 +1,30 @@
 <div class="container">
 
+    <a href="<?= base_url() ?>teknisi/laporan" class="btn btn-info btn-block mt-3">
+        <i class="fas fa-user-edit"></i> Lapor</a>
+
+    <form action="<?= base_url() ?>teknisi/carilaporan" method="GET" class="mt-3">
+        <!-- <div class="col-auto"> -->
+        <!-- <label class="sr-only" for="inlineFormInputGroup">Username</label> -->
+        <div class="input-group mb-2">
+            <input type="text" class="form-control" name="keyword" id="keyword" placeholder="Cleaning panel, Feedmill, Electrical... " autocomplete="off">
+            <button type="submit">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+            </button>
+        </div>
+        <!-- </div> -->
+    </form>
     <div class="data my-3">
         <div class="table-responsive">
-            <table class="table mydatatable" id="">
+            <table class="table" id="">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Laporan Teknisi</th>
+                        <th>Keterangan</th>
+                        <th>Gambar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -13,26 +32,29 @@
                     foreach ($laporan as $l) :
                     ?>
                         <tr>
+                            <!-- <td>
+                                <?php echo $l['id_laporan']; ?>
+                            </td> -->
+
                             <td>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <!-- <p class="card-text">id : <?php echo $l['id_laporan']; ?></p> -->
-                                        <h5 class="card-title"><?php echo date("d/m/Y", strtotime($l['tanggal'])); ?> </h5>
-                                        <h5 class="card-title"><?php echo $l['grup']; ?> - <?php echo $l['area']; ?> </h5>
-                                        <h6 class="card-subtitle mb-2 text-muted">Teknisi : <?php echo $l['nama_teknisi']; ?></h6>
-                                        <p class="card-text">Pekerjaan : <?php echo $l['pekerjaan']; ?></p>
-                                        <p class="card-text"><?php $status = $l['status'];
-                                                                if ($status == 'Done') {
-                                                                    echo '<span class="badge badge-pill badge-success">Selesai</span>';
-                                                                } else {
-                                                                    echo '<span class="badge badge-pill badge-warning">Continue</span>';
-                                                                }
-                                                                ?></p>
+                                <h5 class="card-title"><?php echo date("d/m/Y", strtotime($l['tanggal'])); ?> </h5>
+                                <h5 class="card-title"><?php echo $l['grup']; ?> - <?php echo $l['area']; ?> </h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Teknisi : <?php echo $l['nama_teknisi']; ?></h6>
+                                <!-- <p class="card-text">Pekerjaan : <?php echo $l['pekerjaan']; ?></p> -->
+                                <p class="card-text"><?php $status = $l['status'];
+                                                        if ($status == 'Done') {
+                                                            echo '<span class="badge badge-pill badge-success">Selesai</span>';
+                                                        } else {
+                                                            echo '<span class="badge badge-pill badge-warning">Continue</span>';
+                                                        }
+                                                        ?></p>
 
 
-                                        <a href="" class="btn btn-info btn-sm" id="detail" data-toggle="modal" data-target="#modalDetail" data-tanggal="<?= $l['tanggal'] ?>" data-grup="<?= $l['grup'] ?>" data-type_wo="<?= $l['type_wo'] ?>" data-area="<?= $l['area'] ?>" data-pekerjaan="<?= $l['pekerjaan'] ?>" data-analisis="<?= $l['analisis'] ?>" data-sparepart="<?= $l['sparepart'] ?>" data-jam_mulai="<?= $l['jam_mulai'] ?>" data-jam_selesai="<?= $l['jam_selesai'] ?>" data-durasi="<?= $l['durasi'] ?>" data-shift="<?= $l['shift'] ?>" data-total_person="<?= $l['total_person'] ?>" data-nama_teknisi="<?= $l['nama_teknisi'] ?>" data-made_by="<?= $l['made_by'] ?>" data-status="<?= $l['status'] ?>">Detail</a>
-                                    </div>
-                                </div>
+                                <a href="" class="btn btn-info btn-sm" id="detail" data-toggle="modal" data-target="#modalDetail" data-tanggal="<?= $l['tanggal'] ?>" data-grup="<?= $l['grup'] ?>" data-type_wo="<?= $l['type_wo'] ?>" data-area="<?= $l['area'] ?>" data-pekerjaan="<?= $l['pekerjaan'] ?>" data-analisis="<?= $l['analisis'] ?>" data-sparepart="<?= $l['sparepart'] ?>" data-jam_mulai="<?= $l['jam_mulai'] ?>" data-jam_selesai="<?= $l['jam_selesai'] ?>" data-durasi="<?= $l['durasi'] ?>" data-shift="<?= $l['shift'] ?>" data-total_person="<?= $l['total_person'] ?>" data-nama_teknisi="<?= $l['nama_teknisi'] ?>" data-made_by="<?= $l['made_by'] ?>" data-status="<?= $l['status'] ?>">Detail</a>
+                            </td>
+
+                            <td>
+                                <img src="<?= base_url(); ?>uploads/photo/<?php echo $l['photo']; ?>" alt="" class="img-thumbnail img-fluid" style="max-width: 200px; max-height: 250px;">
                             </td>
                         </tr>
                     <?php
@@ -130,7 +152,6 @@
 </div>
 
 
-
 <script src="<?= base_url() ?>vendor/jquery/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
@@ -150,6 +171,7 @@
             var made_by = $(this).data('made_by');
             var nama_teknisi = $(this).data('nama_teknisi');
             var status = $(this).data('status');
+            // var photo = $(this).data('photo')
             // $('#tanggal').text(tanggal);
             $('#grup').text(grup);
             $('#type_wo').text(type_wo);
@@ -165,6 +187,7 @@
             $('#nama_teknisi').text(nama_teknisi);
             $('#made_by').text(made_by);
             $('#status').text(status);
+            // $('#photo').(photo);
         })
     })
 </script>

@@ -12,7 +12,9 @@
 	},
 	"require": {
 		"php": ">=5.3.7",
-		"phpoffice/phpspreadsheet": "^1.17"
+		"phpoffice/phpspreadsheet": "^1.18",
+		"dompdf/dompdf": "^1.0",
+		"endroid/qr-code": "^4.2"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"

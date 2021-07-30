@@ -78,9 +78,11 @@
                         <hr>
                         <a href="<?= base_url() ?>auth/kelolaakun" class="btn btn-warning"><i class="fas fa-user-friends"></i> Akun Teknisi</a>
                         <hr>
-                        <a href="<?= base_url() ?>laporan" class="btn btn-info"><i class="fas fa-file-download"></i> Download Laporan</a>
+                        <a href="<?= base_url() ?>laporan" class="btn btn-info"><i class="fas fa-file-download"></i> Download Laporan (Excel)</a>
                         <hr>
                         <a href="<?= base_url() ?>tracking" class="btn btn-secondary"><i class="fab fa-searchengin"></i> Tracking Teknisi</a>
+                        <hr>
+                        <a href="<?= base_url() ?>cetak" class="btn btn-success"><i class="fas fa-certificate"></i> Cetak Laporan (Audit)</a>
                     </tbody>
                 </table>
             </div>

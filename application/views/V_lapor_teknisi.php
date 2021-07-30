@@ -4,7 +4,7 @@
         <h3>Maintenance</h3>
     </center>
     <hr>
-    <form action="<?= base_url() ?>teknisi/kirimlaporan" method="POST">
+    <form action="<?= base_url() ?>teknisi/kirimlaporan" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="exampleInputEmail1">Shift</label>
             <select class="form-control" id="shift" name="shift" required>
@@ -103,6 +103,11 @@
                     <option value="Done">Done</option>
                     <option value="To Be Continue">To Be Continue</option>
                 </select>
+            </div>
+
+            <div class="form-group col-md-12">
+                <label for="exampleInputEmail1">Ambil Photo</label>
+                <input type="file" class="form-control-file" id="photo" name="photo" required>
             </div>
 
         </div>

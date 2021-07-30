@@ -4,7 +4,7 @@ class M_admin extends CI_Model
 {
     public function getAllLaporan()
     {
-        return $this->db->query("SELECT * FROM laporan ORDER BY id_laporan DESC")->result_array();
+        return $this->db->query("SELECT * FROM laporan ORDER BY tanggal DESC")->result_array();
     }
 
     // public function getAllLaporanModal()
