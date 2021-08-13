@@ -8,7 +8,6 @@
                 <thead class="thead-dark">
                     <tr>
                         <th>Keterangan</th>
-                        <th>Gambar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,9 +36,6 @@
                                 <a href="" class="btn btn-info btn-sm" id="detail" data-toggle="modal" data-target="#modalDetail" data-tanggal="<?= $l['tanggal'] ?>" data-grup="<?= $l['grup'] ?>" data-type_wo="<?= $l['type_wo'] ?>" data-area="<?= $l['area'] ?>" data-pekerjaan="<?= $l['pekerjaan'] ?>" data-analisis="<?= $l['analisis'] ?>" data-sparepart="<?= $l['sparepart'] ?>" data-jam_mulai="<?= $l['jam_mulai'] ?>" data-jam_selesai="<?= $l['jam_selesai'] ?>" data-durasi="<?= $l['durasi'] ?>" data-shift="<?= $l['shift'] ?>" data-total_person="<?= $l['total_person'] ?>" data-nama_teknisi="<?= $l['nama_teknisi'] ?>" data-made_by="<?= $l['made_by'] ?>" data-status="<?= $l['status'] ?>">Detail</a>
                             </td>
 
-                            <td>
-                                <img src="<?= base_url(); ?>uploads/photo/<?php echo $l['photo']; ?>" alt="" class="img-thumbnail img-fluid" style="max-width: 200px; max-height: 250px;">
-                            </td>
                         </tr>
                     <?php
                     endforeach; ?>

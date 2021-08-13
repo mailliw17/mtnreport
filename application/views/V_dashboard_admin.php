@@ -4,19 +4,16 @@
         <section class="jumbotron text-center">
             <div class="container">
                 <h1 class="jumbotron-heading">Maintenance Division</h1>
-                <p class="lead text-muted">Sistem Laporan Maintenance</p>
-                <p class="lead text-muted"> Pilih Berdasarkan Kategori :</p>
+                <p class="lead text-muted">Lihat Request Pekerjaan</p>
+                <!-- <p class="lead text-muted"> Pilih Berdasarkan Kategori :</p> -->
                 <p>
-                    <a href="<?= base_url() ?>admin/mechanical" class="btn btn-primary my-2"><i class="fas fa-cogs"></i> Mechanical</a>
-                    <a href="<?= base_url() ?>admin/civil" class="btn btn-primary my-2"><i class="fas fa-globe-europe"></i> Civil</a>
-                    <a href="<?= base_url() ?>admin/automation" class="btn btn-primary my-2"><i class="fas fa-robot"></i> Automation</a>
-                    <a href="<?= base_url() ?>admin/electrical" class="btn btn-primary my-2"><i class="fas fa-bolt"></i> Electrical</a>
+                    <a href="<?= base_url() ?>admin/request" class="btn btn-warning my-2"><i class="fas fa-eye"></i> REQUEST PEKERJAAN</a>
                 </p>
             </div>
         </section>
 
         <!-- <div class="album py-3 bg-light"> -->
-        <div class="container">
+        <div class="container mb-5">
             <h2 class="mb-3">Laporan Keseluruhan</h2>
 
             <div class="table-responsive">
@@ -39,6 +36,7 @@
                             <th>Teknisi</th>
                             <th>Status</th>
                             <th>Aksi</th>
+                            <th></th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -76,12 +74,10 @@
                                 <td>
                                     <a href="<?= base_url('admin/editlaporan/')  . $l['id_laporan'] ?>" class="btn btn-warning btn-sm"><i class="far fa-edit"></i></a>
                                 </td>
-                                <!-- <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td> -->
+
+                                <td>
+                                    <a href="<?= base_url('cetak/pilih/')  . $l['id_laporan'] ?>" target="_blank" class="btn btn-success btn-sm" onclick="javacript:return confirm('Anda yakin mencetak laporan ini?')"><i class="fas fa-print"></i></a>
+                                </td>
                             </tr>
                         <?php $no++;
                         endforeach; ?>
@@ -171,13 +167,6 @@
                             <th>Status</th>
                             <td> <span id="status"></span> </td>
                         </tr>
-                        <tr>
-                            <th>Photo</th>
-                            <td>
-                                <!-- image load dynamicly with javascript -->
-                                <img src="" id="photo" alt="" class="img-fluid img-thumbnail" style="max-width: 500px; max-height: 500px;">
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -209,7 +198,7 @@
             var nama_teknisi = $(this).data('nama_teknisi');
             var made_by = $(this).data('made_by');
             var status = $(this).data('status');
-            var photo = $(this).data('photo');
+            // var photo = $(this).data('photo');
             // $('#tanggal').text(tanggal);
             $('#grup').text(grup);
             $('#type_wo').text(type_wo);
@@ -225,7 +214,7 @@
             $('#nama_teknisi').text(nama_teknisi);
             $('#made_by').text(made_by);
             $('#status').text(status);
-            document.getElementById("photo").src = "<?= base_url(); ?>uploads/photo/" + photo;
+            // document.getElementById("photo").src = "<?= base_url(); ?>uploads/photo/" + photo;
         })
     })
 </script>

@@ -91,4 +91,23 @@ class M_admin extends CI_Model
         $this->db->where('id_laporan', $this->input->post('id_laporan'));
         $this->db->update('laporan', $data);
     }
+
+    public function getAllPekerjaan()
+    {
+        return $this->db->query("SELECT * FROM work_order WHERE wo_status = 2")->result_array();
+    }
+
+    public function selesaikanPekerjaan($id_work_order)
+    {
+        $this->db->query("UPDATE work_order SET wo_status = 5 WHERE id_work_order = '$id_work_order'");
+
+        $this->db->query("UPDATE detail_work_order SET execution = CURRENT_TIMESTAMP WHERE id_work_order = '$id_work_order'");
+    }
+
+    public function tolakPekerjaan($id_work_order)
+    {
+        $this->db->query("UPDATE work_order SET wo_status = 4 WHERE id_work_order = '$id_work_order'");
+
+        $this->db->query("DELETE from detail_work_order WHERE id_work_order = '$id_work_order'");
+    }
 }

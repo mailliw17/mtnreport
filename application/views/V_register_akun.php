@@ -70,7 +70,7 @@
             </div>
         </div>
 
-        <div class="col-md-8 float-right">
+        <div class="col-md-8 float-right mb-3">
             <a href="<?= base_url() ?>auth/kelolaakun" class="btn btn-danger">Batal</a>
             <button type="submit" class="btn btn-primary">Proses</button>
         </div>

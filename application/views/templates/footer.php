@@ -82,7 +82,7 @@
                         <hr>
                         <a href="<?= base_url() ?>tracking" class="btn btn-secondary"><i class="fab fa-searchengin"></i> Tracking Teknisi</a>
                         <hr>
-                        <a href="<?= base_url() ?>cetak" class="btn btn-success"><i class="fas fa-certificate"></i> Cetak Laporan (Audit)</a>
+                        <a href="<?= base_url() ?>auth/kelolaakunnonmtn" class="btn btn-success btn-sm"><i class="fas fa-user-plus"></i> Akun Baru SPV (Non Maintenance)</a>
                     </tbody>
                 </table>
             </div>

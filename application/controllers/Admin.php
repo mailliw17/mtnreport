@@ -154,4 +154,29 @@ class Admin extends CI_Controller
 			redirect('admin');
 		}
 	}
+
+	public function request()
+	{
+		$data['permasalahan'] = $this->M_admin->getAllPekerjaan();
+		$judul['page_title'] = 'Request Pekerjaan';
+		$this->load->view('templates/header_teknisi', $judul);
+		$this->load->view('V_request_pekerjaan', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function terima($id_work_order)
+	{
+		$this->M_admin->selesaikanPekerjaan($id_work_order);
+
+		$this->session->set_flashdata('berhasil', 'ok');
+		redirect('admin/request');
+	}
+
+	public function tolak($id_work_order)
+	{
+		$this->M_admin->tolakPekerjaan($id_work_order);
+
+		$this->session->set_flashdata('tolak', 'ok');
+		redirect('admin/request');
+	}
 }

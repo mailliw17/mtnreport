@@ -1,10 +1,11 @@
-<div class="container">
+<div class="container mt-3">
     <center>
-        <h3 class="my-3">Pilihan Menu </h3>
+        <h5>Selamat Datang, <?= $this->session->userdata('nama'); ?></h5>
+        <h5 class="my-3">Pilihan Menu </h5>
         <hr>
     </center>
     <div class="row my-3">
-        <div class="col-sm-6 my-3">
+        <div class="col-sm-4 my-3">
             <div class="card text-center bg-primary">
                 <div class="card-body">
                     <h5 class="card-title">Laporan Teknisi</h5>
@@ -12,11 +13,19 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 my-3">
+        <div class="col-sm-4 my-3">
             <div class="card text-center bg-success">
                 <div class="card-body">
                     <h5 class="card-title">Lapor Pekerjaan</h5>
                     <a href="<?= base_url() ?>teknisi/laporan" class="btn btn-dark">LAPOR</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 my-3">
+            <div class="card text-center bg-warning">
+                <div class="card-body">
+                    <h5 class="card-title">Request Pekerjaan</h5>
+                    <a href="<?= base_url() ?>teknisi/request" class="btn btn-dark">LIHAT</a>
                 </div>
             </div>
         </div>

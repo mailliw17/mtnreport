@@ -17,15 +17,15 @@ class Cetak extends CI_Controller
 		$this->load->helper('url');
 	}
 
-	public function index()
-	{
-		$data['laporan'] = $this->M_admin->getAllLaporan();
-		// $data['laporanmodal'] = $this->M_admin->getAllLaporanModal();
-		$judul['page_title'] = 'Cetak Laporan';
-		$this->load->view('templates/header', $judul);
-		$this->load->view('V_dashboard_cetak', $data);
-		$this->load->view('templates/footer');
-	}
+	// public function index()
+	// {
+	// 	$data['laporan'] = $this->M_admin->getAllLaporan();
+	// 	// $data['laporanmodal'] = $this->M_admin->getAllLaporanModal();
+	// 	$judul['page_title'] = 'Cetak Laporan';
+	// 	$this->load->view('templates/header', $judul);
+	// 	$this->load->view('V_dashboard_cetak', $data);
+	// 	$this->load->view('templates/footer');
+	// } 
 
 	public function pilih($id_laporan)
 	{

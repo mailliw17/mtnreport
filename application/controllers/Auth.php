@@ -42,14 +42,20 @@ class Auth extends CI_Controller
 			$nama = $data['nama'];
 			$username = $data['username'];
 			$role = $data['role'];
+			$grup = $data['grup'];
 			$this->session->set_userdata('nama', $nama);
 			$this->session->set_userdata('username', $username);
 			$this->session->set_userdata('role', $role);
+			$this->session->set_userdata('grup', $grup);
 			$this->session->set_userdata('login', TRUE);
 			if ($role == 'Admin') {
 				redirect('admin');
-			} else {
+			} elseif ($role == 'Teknisi') {
 				redirect('teknisi');
+			} elseif ($role == 'Supervisor-NonMTN') {
+				redirect('supervisor');
+			} elseif ($role == 'Karyawan-NonMTN') {
+				redirect('karyawan');
 			}
 		} else {
 			$this->session->set_flashdata('gagal_login', 'warning');
@@ -73,6 +79,26 @@ class Auth extends CI_Controller
 		$judul['page_title'] = 'Kelola Akun';
 		$this->load->view('templates/header', $judul);
 		$this->load->view('V_kelola_akun', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function kelolaakunnonmtn()
+	{
+		$data['spv'] = $this->M_auth->getAllAccountSpvNonMtn();
+		// $data['karyawan'] = $this->M_auth->getAllAccountKaryawanNonMtn();
+		$judul['page_title'] = 'Kelola Akun';
+		$this->load->view('templates/header', $judul);
+		$this->load->view('V_kelola_akun_spv_nonmtn', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function kelolaakunkaryawannonmtn()
+	{
+		$grup = $this->session->userdata('grup');
+		$data['karyawan'] = $this->M_auth->getAllAccountKaryawanNonMtn($grup);
+		$judul['page_title'] = 'Kelola Akun';
+		$this->load->view('templates/header_teknisi', $judul);
+		$this->load->view('V_kelola_akun_karyawan_nonmtn', $data);
 		$this->load->view('templates/footer');
 	}
 
@@ -128,6 +154,24 @@ class Auth extends CI_Controller
 		redirect('auth/kelolaakun');
 	}
 
+	public function hapusakunnonmtn($id)
+	{
+		$this->M_auth->hapusakun($id);
+
+		//pindah ke halaman landingpage
+		$this->session->set_flashdata('hapus_akun_berhasil', 'oke');
+		redirect('auth/kelolaakunnonmtn');
+	}
+
+	public function hapusakunkaryawannonmtn($id)
+	{
+		$this->M_auth->hapusakun($id);
+
+		//pindah ke halaman landingpage
+		$this->session->set_flashdata('hapus_akun_berhasil', 'oke');
+		redirect('auth/kelolaakunkaryawannonmtn');
+	}
+
 	public function gantipassword($id)
 	{
 		$info['akun'] = $this->M_auth->getAccInfo($id);
@@ -153,6 +197,148 @@ class Auth extends CI_Controller
 
 			$this->session->set_flashdata('ganti_password_berhasil', 'oke');
 			redirect('auth/kelolaakun');
+		}
+	}
+
+	public function gantipasswordnonmtn($id)
+	{
+		$info['akun'] = $this->M_auth->getAccInfo($id);
+
+		$this->form_validation->set_rules('passwordBaru1', 'Password Baru', 'required|trim|matches[passwordBaru2]', [
+			'matches' => 'Password tidak sama dengan kolom di bawah'
+		]);
+
+		$this->form_validation->set_rules('passwordBaru2', 'Confirm Password', 'required|trim|matches[passwordBaru1]', [
+			'matches' => 'Password tidak sama dengan kolom di atas'
+		]);
+
+		if ($this->form_validation->run() == false) {
+			//load tampilannya
+			$judul['page_title'] = 'Ganti password';
+			$this->load->view('templates/header', $judul);
+			$this->load->view('V_lupa_password_nonmtn', $info);
+			$this->load->view('templates/footer');
+		} else {
+			//password sudah oke
+
+			$this->M_auth->gantipassword($id);
+
+			$this->session->set_flashdata('ganti_password_berhasil', 'oke');
+			redirect('auth/kelolaakunnonmtn');
+		}
+	}
+
+	public function gantipasswordkaryawannonmtn($id)
+	{
+		$info['akun'] = $this->M_auth->getAccInfo($id);
+
+		$this->form_validation->set_rules('passwordBaru1', 'Password Baru', 'required|trim|matches[passwordBaru2]', [
+			'matches' => 'Password tidak sama dengan kolom di bawah'
+		]);
+
+		$this->form_validation->set_rules('passwordBaru2', 'Confirm Password', 'required|trim|matches[passwordBaru1]', [
+			'matches' => 'Password tidak sama dengan kolom di atas'
+		]);
+
+		if ($this->form_validation->run() == false) {
+			//load tampilannya
+			$judul['page_title'] = 'Ganti password';
+			$this->load->view('templates/header_teknisi', $judul);
+			$this->load->view('V_lupa_password_nonmtn', $info);
+			$this->load->view('templates/footer');
+		} else {
+			//password sudah oke
+
+			$this->M_auth->gantipassword($id);
+
+			$this->session->set_flashdata('ganti_password_berhasil', 'oke');
+			redirect('auth/kelolaakunkaryawannonmtn');
+		}
+	}
+
+	public function registerakunspv()
+	{
+		$this->form_validation->set_rules(
+			'username',
+			'Username',
+			'trim|required|is_unique[users.username]',
+			array(
+				'is_unique' => 'Pembuatan Akun Gagal karena username sudah terdaftar'
+			)
+		);
+
+		$this->form_validation->set_rules('password1', 'Password', 'required|trim|matches[password2]', [
+			'matches' => 'Password tidak sama dengan kolom di bawah'
+		]);
+
+		$this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]', [
+			'matches' => 'Password tidak sama  dengan kolom di atas'
+		]);
+
+		if ($this->form_validation->run() == false) {
+			$judul['page_title'] = 'Register Akun';
+			$this->load->view('templates/header', $judul);
+			$this->load->view('V_register_akun_spv_nonmtn');
+			$this->load->view('templates/footer');
+		} else {
+			$data = [
+				'nama' => htmlspecialchars($this->input->post('nama', true)),
+				'username' => htmlspecialchars($this->input->post('username', true)),
+				'password' => md5($this->input->post('password1', true)),
+				'role' => htmlspecialchars($this->input->post('role', true)),
+				'grup' => htmlspecialchars($this->input->post('grup', true))
+			];
+
+			//insert ke database
+			$this->M_auth->register($data);
+
+
+			//pindah ke halaman landingpage
+			$this->session->set_flashdata('register_berhasil', 'oke');
+			redirect('auth/kelolaakunnonmtn');
+		}
+	}
+
+	public function registerakunkaryawan()
+	{
+		$this->form_validation->set_rules(
+			'username',
+			'Username',
+			'trim|required|is_unique[users.username]',
+			array(
+				'is_unique' => 'Pembuatan Akun Gagal karena username sudah terdaftar'
+			)
+		);
+
+		$this->form_validation->set_rules('password1', 'Password', 'required|trim|matches[password2]', [
+			'matches' => 'Password tidak sama dengan kolom di bawah'
+		]);
+
+		$this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]', [
+			'matches' => 'Password tidak sama  dengan kolom di atas'
+		]);
+
+		if ($this->form_validation->run() == false) {
+			$judul['page_title'] = 'Register Akun';
+			$this->load->view('templates/header_teknisi', $judul);
+			$this->load->view('V_register_akun_karyawan_nonmtn');
+			$this->load->view('templates/footer');
+		} else {
+			$data = [
+				'nama' => htmlspecialchars($this->input->post('nama', true)),
+				'username' => htmlspecialchars($this->input->post('username', true)),
+				'password' => md5($this->input->post('password1', true)),
+				'role' => htmlspecialchars($this->input->post('role', true)),
+				'grup' => htmlspecialchars($this->input->post('grup', true))
+			];
+
+			//insert ke database
+			$this->M_auth->register($data);
+
+
+			//pindah ke halaman landingpage
+			$this->session->set_flashdata('register_berhasil', 'oke');
+			redirect('auth/kelolaakunkaryawannonmtn');
 		}
 	}
 }

@@ -19,6 +19,16 @@ class M_auth extends CI_Model
         return $this->db->query("SELECT * FROM users WHERE role = 'Teknisi' ORDER BY id DESC")->result_array();
     }
 
+    public function getAllAccountSpvNonMtn()
+    {
+        return  $this->db->query("SELECT * FROM users WHERE role = 'Supervisor-NonMTN' ORDER BY id DESC")->result_array();
+    }
+
+    public function getAllAccountKaryawanNonMtn($grup)
+    {
+        return  $this->db->query("SELECT * FROM users WHERE role = 'Karyawan-NonMTN' AND grup = '$grup' ORDER BY id DESC")->result_array();
+    }
+
     public function hapusakun($id)
     {
         $this->db->query("DELETE FROM users WHERE id = '$id'");

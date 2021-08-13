@@ -105,10 +105,10 @@
                 </select>
             </div>
 
-            <div class="form-group col-md-12">
+            <!-- <div class="form-group col-md-12">
                 <label for="exampleInputEmail1">Ambil Photo</label>
                 <input type="file" class="form-control-file" id="photo" name="photo" required>
-            </div>
+            </div> -->
 
         </div>
 

@@ -14,7 +14,7 @@ class M_teknisi extends CI_Model
 
     public function laporankerja()
     {
-        return $this->db->query("SELECT * FROM laporan ORDER BY id_laporan DESC")->result_array();
+        return $this->db->query("SELECT * FROM laporan ORDER BY tanggal DESC")->result_array();
     }
 
     public function getNamaTeknisi()
@@ -32,6 +32,11 @@ class M_teknisi extends CI_Model
         sparepart LIKE '%$keyword%' OR
         nama_teknisi LIKE '%$keyword%' OR
         made_by LIKE '%$keyword%' OR
-        status LIKE '%$keyword%'")->result_array();
+        status LIKE '%$keyword%' ORDER BY tanggal DESC")->result_array();
+    }
+
+    public function getAllPekerjaan()
+    {
+        return $this->db->query("SELECT * FROM work_order WHERE wo_status = 2 ORDER BY waktu DESC")->result_array();
     }
 }

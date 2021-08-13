@@ -14,6 +14,7 @@ class teknisi extends CI_Controller
 		$this->load->model('M_teknisi');
 		$this->load->library('session');
 		$this->load->helper('url');
+		$this->load->library('image_lib');
 	}
 
 	public function index()
@@ -61,22 +62,20 @@ class teknisi extends CI_Controller
 		$jam_selesai_ok = date("H:i:s", strtotime($jam_selesai));
 
 		// untuk foto
-		$photo = $_FILES['photo'];
-		if ($photo = '') {
-		} else {
-			$config['upload_path'] = './uploads/photo';
-			$config['allowed_types'] = 'jpg|png|gif';
+		// if (isset($_FILES['photo']['name'])) {
+		// 	$config['upload_path'] = './uploads/photo';
+		// 	$config['allowed_types'] = 'jpg|png|gif';
 
-			$this->load->library('upload', $config);
-			if (!$this->upload->do_upload('photo')) {
-				echo "Upload Gagal, silahkan upload file berupa gambar...";
-				die();
-			} else {
-				$photo = $this->upload->data('file_name');
-			}
-		}
+		// 	$this->load->library('upload', $config);
 
-		// array data utk kirim ke model
+		// 	if (!$this->upload->do_upload('photo')) {
+		// 		echo "Upload Gagal, silahkan upload file berupa gambar...";
+		// 		die();
+		// 	} else {
+		// 		$photo = $this->upload->data('file_name');
+		// 	} 
+		// }
+
 		$data = [
 			"shift" => $this->input->post('shift', true),
 			"tanggal" => $this->input->post('tanggal', true),
@@ -93,7 +92,7 @@ class teknisi extends CI_Controller
 			"nama_teknisi" => $hasil_nama_teknisi,
 			"made_by" => $this->input->post('made_by', true),
 			"status" => $this->input->post('status', true),
-			"photo" => $photo
+			// "photo" => $photo
 		];
 
 		// kirim data array ke model
@@ -136,6 +135,15 @@ class teknisi extends CI_Controller
 		$judul['page_title'] = 'Hasil Pencarian';
 		$this->load->view('templates/header_teknisi', $judul);
 		$this->load->view('V_hasil_pencarian', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function request()
+	{
+		$data['permasalahan'] = $this->M_teknisi->getAllPekerjaan();
+		$judul['page_title'] = 'Request Pekerjaan';
+		$this->load->view('templates/header_teknisi', $judul);
+		$this->load->view('V_request_pekerjaan_teknisi', $data);
 		$this->load->view('templates/footer');
 	}
 }
