@@ -37,6 +37,10 @@
                         <option value="" selected disabled>--SILAHKAN PILIH--</option>
                         <option value="Produksi">Produksi</option>
                         <option value="Warehouse">Warehouse</option>
+                        <option value="QSHE">QSHE</option>
+                        <option value="Feed Tech">Feed Tech</option>
+                        <option value="PPIC">PPIC</option>
+                        <option value="PGA">PGA</option>
                         <!-- Tolong tambahin lagi -->
                     </select>
                 </div>
