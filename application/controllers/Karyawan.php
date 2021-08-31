@@ -49,6 +49,7 @@ class karyawan extends CI_Controller
 			"area" => $this->input->post('area', true),
 			"permasalahan" => $this->input->post('permasalahan', true),
 			"request_by" => $this->input->post('request_by', true),
+			"bagian_teknisi" => $this->input->post('bagian_teknisi', true),
 			"wo_status" => 1,
 			"photo" => $photo
 		];

@@ -7,7 +7,7 @@
                 <p class="lead text-muted">Lihat Request Pekerjaan</p>
                 <!-- <p class="lead text-muted"> Pilih Berdasarkan Kategori :</p> -->
                 <p>
-                    <a href="<?= base_url() ?>admin/request" class="btn btn-warning my-2"><i class="fas fa-eye"></i> REQUEST PEKERJAAN</a>
+                    <a href="<?= base_url() ?>admin/request" class="btn btn-warning my-2"><i class="fas fa-eye"></i> REQUEST PEKERJAAN <span class="badge badge-danger"><?php echo $hitung; ?></span></a>
                 </p>
             </div>
         </section>

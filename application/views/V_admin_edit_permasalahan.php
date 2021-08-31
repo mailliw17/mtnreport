@@ -1,54 +1,46 @@
 <div class="container mt-3">
     <center>
-        <h1>Laporan Permasalahan</h1>
+        <h1>Edit Laporan Permasalahan</h1>
         <h3><?= $this->session->userdata('grup'); ?></h3>
     </center>
     <hr>
-    <form action="<?= base_url() ?>karyawan/kirimlaporan" method="POST" enctype="multipart/form-data">
+    <form method="POST">
 
         <!-- ID Work Order -->
-        <input type="hidden" class="form-control" id="id_work_order" name="id_work_order" autocomplete="off" value="<?= random_string('basic', 10); ?>">
+        <input type="hidden" class="form-control" id="id_work_order" name="id_work_order" autocomplete="off" value="<?= $permasalahan['id_work_order']; ?>">
 
         <!-- Waktu -->
         <input type="hidden" class="form-control" id="waktu" name="waktu" value="<?php date_default_timezone_set("Asia/Jakarta");
                                                                                     echo date("Y-m-d H:i:s"); ?>" autocomplete="off">
 
         <!-- Perequest -->
-        <input type="hidden" class="form-control" id="request_by" name="request_by" value="<?= $this->session->userdata('nama'); ?>" autocomplete="off">
+        <input type="hidden" class="form-control" id="request_by" name="request_by" value="<?= $permasalahan['request_by']; ?>" autocomplete="off">
 
-        <!-- Grup si karyawana -->
-        <input type="hidden" class="form-control" id="grup" name="grup" value="<?= $this->session->userdata('grup'); ?>" autocomplete="off">
+        <input type="hidden" class="form-control" id="approved_by" name="approved_by" value="<?= $permasalahan['approved_by']; ?>" autocomplete="off">
+
+        <!-- Grup si karyawan -->
+        <input type="hidden" class="form-control" id="grup" name="grup" value="<?= $permasalahan['grup']; ?>" autocomplete="off">
 
         <div class="form-group">
             <label for="exampleFormControlInput1">Area</label>
-            <input type="text" class="form-control" id="area" name="area" autocomplete="off" required>
+            <input type="text" class="form-control" id="area" name="area" autocomplete="off" value="<?= $permasalahan['area']; ?>" required>
         </div>
 
         <div class="form-group">
             <label for="exampleFormControlTextarea1">Permasalahan</label>
-            <textarea class="form-control" id="permasalahan" name="permasalahan" rows="3" required></textarea>
+            <textarea class="form-control" id="permasalahan" name="permasalahan" rows="3" required><?= $permasalahan['permasalahan']; ?></textarea>
         </div>
 
         <div class="form-group">
-            <!-- <div class="col-md-2"> -->
             <label for="exampleFormControlSelect1">Bagian Teknisi</label>
-            <!-- </div> -->
-            <!-- <div class="col-md-6"> -->
             <select class="form-control" name="bagian_teknisi" required>
-                <option value="" selected disabled>--SILAHKAN PILIH--</option>
+                <option value="<?= $permasalahan['bagian_teknisi']; ?>" selected><?= $permasalahan['bagian_teknisi']; ?></option>
                 <option value="Mechanical">Mechanical</option>
                 <option value="Automation">Automation</option>
                 <option value="Electrical">Electrical</option>
                 <option value="Civil">Civil</option>
                 <option value="Others">Others</option>
-                <!-- Tolong tambahin lagi -->
             </select>
-            <!-- </div> -->
-        </div>
-
-        <div class="form-group">
-            <label for="exampleInputEmail1">Ambil Photo</label>
-            <input type="file" class="form-control-file" id="photo" name="photo" required>
         </div>
 
         <div class="form-group form-check">

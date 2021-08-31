@@ -97,6 +97,11 @@ class M_admin extends CI_Model
         return $this->db->query("SELECT * FROM work_order WHERE wo_status = 2")->result_array();
     }
 
+    public function hitungPermasalahan()
+    {
+        return $this->db->query("SELECT * FROM work_order WHERE wo_status = 2")->num_rows();
+    }
+
     public function selesaikanPekerjaan($id_work_order)
     {
         $this->db->query("UPDATE work_order SET wo_status = 5 WHERE id_work_order = '$id_work_order'");
@@ -104,10 +109,40 @@ class M_admin extends CI_Model
         $this->db->query("UPDATE detail_work_order SET execution = CURRENT_TIMESTAMP WHERE id_work_order = '$id_work_order'");
     }
 
-    public function tolakPekerjaan($id_work_order)
+    public function tolakPekerjaan($id_work_order, $alasan)
     {
         $this->db->query("UPDATE work_order SET wo_status = 4 WHERE id_work_order = '$id_work_order'");
 
         $this->db->query("DELETE from detail_work_order WHERE id_work_order = '$id_work_order'");
+
+        $this->db->query("INSERT INTO work_order_ditolak (id_work_order, alasan) VALUES('$id_work_order', '$alasan')");
+    }
+
+    public function carirequest($keyword)
+    {
+        return $this->db->query("SELECT * FROM work_order WHERE bagian_teknisi='$keyword' AND wo_status=2")->result_array();
+    }
+
+    public function editpermasalahan()
+    {
+        $data = [
+            "id_work_order" => $this->input->post('id_work_order', true),
+            "waktu" => $this->input->post('waktu', true),
+            "grup" => $this->input->post('grup', true),
+            "area" => $this->input->post('area', true),
+            "permasalahan" => $this->input->post('permasalahan', true),
+            "bagian_teknisi" => $this->input->post('bagian_teknisi', true),
+            "request_by" => $this->input->post('request_by', true),
+            "approved_by" => $this->input->post('approved_by', true),
+            "wo_status" => 2,
+        ];
+
+        $this->db->where('id_work_order', $this->input->post('id_work_order'));
+        $this->db->update('work_order', $data);
+    }
+
+    public function ambildatapermasalahan($id)
+    {
+        return $this->db->query("SELECT * FROM work_order WHERE id_work_order = '$id'")->row_array();
     }
 }

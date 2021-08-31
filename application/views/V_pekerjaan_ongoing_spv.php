@@ -17,7 +17,7 @@
                     <th>Waktu</th>
                     <th>Area</th>
                     <th>Permasalahan</th>
-                    <th>Requested By</th>
+                    <th>Pemohon</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,9 +29,10 @@
                         <td> <?php echo $no; ?> </td>
                         <td> <?php echo $p['id_work_order']; ?> </td>
                         <td> <?php echo date("d/M/Y G:i:s", strtotime($p['waktu'])); ?> </td>
-                        <td><?php echo $p['area']; ?></td>
+                        <td><?php echo $p['area']; ?> (<?php echo $p['bagian_teknisi']; ?>)</td>
                         <td><?php echo $p['permasalahan']; ?></td>
-                        <td><?php echo $p['request_by']; ?></td>
+                        <td><?php echo $p['request_by']; ?> <br> (Disetujui : <?php echo $p['approved_by']; ?>)</td>
+
                     </tr>
                 <?php $no++;
                 endforeach; ?>
@@ -56,7 +57,8 @@
                     <th>Waktu</th>
                     <th>Area</th>
                     <th>Permasalahan</th>
-                    <th>Requested By</th>
+                    <th>Pemohon</th>
+                    <th>Disetujui</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -72,6 +74,7 @@
                         <td><?php echo $s['area']; ?></td>
                         <td><?php echo $s['permasalahan']; ?></td>
                         <td><?php echo $s['request_by']; ?></td>
+                        <td><?php echo $s['approved_by']; ?></td>
 
                         <td>
                             <a href="<?= base_url('supervisor/konfirmasiselesai/')  . $s['id_work_order'] ?>" class="btn btn-success btn-sm"><i class="fas fa-vote-yea"></i> Konfirmasi</a>

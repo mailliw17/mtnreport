@@ -1,27 +1,13 @@
 <div class="container mt-3">
 
-    <a href="<?= base_url() ?>admin" class="btn btn-info mb-3"><i class="fas fa-backward"></i> Kembali</a>
+    <a href="<?= base_url() ?>admin/request" class="btn btn-info mb-3"><i class="fas fa-backward"></i> Kembali</a>
 
     <hr>
     <center>
-        <div class="my-2">
+        <div class="my-4">
             <h3>
-                Request Pekerjaan
+                Request Pekerjaan <?php echo $grup_apa; ?>
             </h3>
-            <form action="<?= base_url() ?>admin/sortingrequest" method="GET">
-                <div class="form-group col-md-4">
-                    <label for="exampleFormControlSelect1">Grup Kerja</label>
-                    <select class="form-control" name="keyword" id="keyword">
-                        <option selected disabled>Semua Grup</option>
-                        <option value="Mechanical">Mechanical</option>
-                        <option value="Automation">Automation</option>
-                        <option value="Electrical">Electrical</option>
-                        <option value="Civil">Civil</option>
-                        <option value="Others">Others</option>
-                    </select>
-                </div>
-                <button class="btn btn-success btn-sm" type="submit" id="cari"><i class="fas fa-search"></i> Cari</button>
-            </form>
         </div>
     </center>
 
@@ -62,11 +48,11 @@
                         </td>
 
                         <td>
-                            <a href="<?= base_url('admin/terima/')  . $p['id_work_order'] ?>" class="btn btn-success btn-sm"><i class="fas fa-vote-yea"></i> Pekerjaan Selesai</a>
+                            <a href="<?= base_url('admin/terima/')  . $p['id_work_order'] ?>" class="btn btn-success"><i class="fas fa-vote-yea"></i> Pekerjaan Selesai</a>
                         </td>
 
                         <td>
-                            <a onclick="javacript:return confirm('Anda yakin request ini?')" href="<?= base_url('admin/tolak/')  . $p['id_work_order'] ?>" class="btn btn-danger btn-sm"><i class="fas fa-times"></i> Tolak</a>
+                            <a href="<?= base_url('admin/tolak/')  . $p['id_work_order'] ?>" class="btn btn-danger"><i class="fas fa-times"></i> Tolak</a>
                         </td>
                     </tr>
                 <?php $no++;
@@ -126,23 +112,11 @@
     </script>
 <?php endif; ?>
 
-<?php if ($this->session->flashdata('berhasil_edit')) : ?>
-    <script>
-        Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Pekerjaan berhasil diperbarui !',
-            showConfirmButton: false,
-            timer: 1500
-        })
-    </script>
-<?php endif; ?>
-
 <?php if ($this->session->flashdata('tolak')) : ?>
     <script>
         Swal.fire({
             position: 'center',
-            icon: 'warning',
+            icon: 'error',
             title: 'Pekerjaan ditolak !',
             showConfirmButton: false,
             timer: 1500

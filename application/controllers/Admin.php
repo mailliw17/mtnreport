@@ -20,6 +20,7 @@ class Admin extends CI_Controller
 	public function index()
 	{
 		$data['laporan'] = $this->M_admin->getAllLaporan();
+		$data['hitung'] = $this->M_admin->hitungPermasalahan();
 		// $data['laporanmodal'] = $this->M_admin->getAllLaporanModal();
 		$judul['page_title'] = 'Dashboard Admin';
 		$this->load->view('templates/header', $judul);
@@ -164,6 +165,21 @@ class Admin extends CI_Controller
 		$this->load->view('templates/footer');
 	}
 
+	public function sortingrequest()
+	{
+		if ($this->input->get('keyword') !== FALSE) {
+			$data['permasalahan'] = $this->M_admin->carirequest($this->input->get('keyword'));
+		} else {
+			$data['permasalahan'] = array();
+		}
+		$data['grup_apa'] = $this->input->get('keyword');
+
+		$judul['page_title'] = 'Hasil Pencarian';
+		$this->load->view('templates/header_teknisi', $judul);
+		$this->load->view('V_request_pekerjaan_sorting', $data);
+		$this->load->view('templates/footer');
+	}
+
 	public function terima($id_work_order)
 	{
 		$this->M_admin->selesaikanPekerjaan($id_work_order);
@@ -172,11 +188,60 @@ class Admin extends CI_Controller
 		redirect('admin/request');
 	}
 
+	// public function tolak($id_work_order)
+	// {
+	// 	$this->M_admin->tolakPekerjaan($id_work_order);
+
+	// 	$this->session->set_flashdata('tolak', 'ok');
+	// 	redirect('admin/request');
+	// }
+
 	public function tolak($id_work_order)
 	{
-		$this->M_admin->tolakPekerjaan($id_work_order);
+		$data['permasalahan'] = $this->M_admin->ambildatapermasalahan($id_work_order);
 
-		$this->session->set_flashdata('tolak', 'ok');
-		redirect('admin/request');
+		$this->form_validation->set_rules(
+			'alasan',
+			'Alasan',
+			'trim|required'
+		);
+
+		if ($this->form_validation->run() == false) {
+			//load tampilannya
+			$judul['page_title'] = 'Alasan Penolakan';
+			$this->load->view('templates/header_teknisi', $judul);
+			$this->load->view('V_admin_alasan_tolak', $data);
+			$this->load->view('templates/footer');
+		} else {
+
+			$alasan = $this->input->post('alasan', true);
+			$this->M_admin->tolakPekerjaan($id_work_order, $alasan);
+			$this->session->set_flashdata('tolak', 'ok');
+			redirect('admin/request');
+		}
+	}
+
+	public function edit($id)
+	{
+		$data['permasalahan'] = $this->M_supervisor->ambildatapermasalahan($id);
+
+		$this->form_validation->set_rules(
+			'permasalahan',
+			'Permasalahan',
+			'trim|required'
+		);
+
+		if ($this->form_validation->run() == false) {
+			//load tampilannya
+			$judul['page_title'] = 'Ganti password';
+			$this->load->view('templates/header_teknisi', $judul);
+			$this->load->view('V_admin_edit_permasalahan', $data);
+			$this->load->view('templates/footer');
+		} else {
+
+			$this->M_admin->editpermasalahan();
+			$this->session->set_flashdata('berhasil_edit', 'ok');
+			redirect('admin/request');
+		}
 	}
 }

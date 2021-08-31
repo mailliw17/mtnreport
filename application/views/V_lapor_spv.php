@@ -1,10 +1,11 @@
 <div class="container mt-3">
     <center>
+        <a href="<?= base_url() ?>supervisor" class="btn btn-info"><i class="fas fa-backward"></i> Kembali</a>
         <h1>Laporan Permasalahan</h1>
         <h3><?= $this->session->userdata('grup'); ?></h3>
     </center>
     <hr>
-    <form action="<?= base_url() ?>karyawan/kirimlaporan" method="POST" enctype="multipart/form-data">
+    <form action="<?= base_url() ?>supervisor/kirimlaporan" method="POST" enctype="multipart/form-data">
 
         <!-- ID Work Order -->
         <input type="hidden" class="form-control" id="id_work_order" name="id_work_order" autocomplete="off" value="<?= random_string('basic', 10); ?>">
@@ -15,6 +16,8 @@
 
         <!-- Perequest -->
         <input type="hidden" class="form-control" id="request_by" name="request_by" value="<?= $this->session->userdata('nama'); ?>" autocomplete="off">
+
+        <input type="hidden" class="form-control" id="approved_by" name="approved_by" value="<?= $this->session->userdata('nama'); ?>" autocomplete="off">
 
         <!-- Grup si karyawana -->
         <input type="hidden" class="form-control" id="grup" name="grup" value="<?= $this->session->userdata('grup'); ?>" autocomplete="off">

@@ -14,27 +14,22 @@
                 <tr>
                     <th>No</th>
                     <th>ID Work Order</th>
-                    <th>Waktu</th>
-                    <th>Area</th>
+                    <th>Bagian</th>
                     <th>Permasalahan</th>
-                    <th>Requested By</th>
+                    <th>Alasan</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 $no = 1;
-                foreach ($selesai as $s) :
+                foreach ($ditolak as $d) :
                 ?>
                     <tr>
                         <td> <?php echo $no; ?> </td>
-                        <td> <?php echo $s['id_work_order']; ?> </td>
-                        <td> <strong>Persetujuan :</strong> <?php echo date("d/M/Y G:i:s", strtotime($s['mulai'])); ?> <br>
-                            <strong>Pengerjaan :</strong> <?php echo date("d/M/Y G:i:s", strtotime($s['eksekusi'])); ?> <br>
-                            <strong>Acc Mng/SPV :</strong> <?php echo date("d/M/Y G:i:s", strtotime($s['acc'])); ?>
-                        </td>
-                        <td><?php echo $s['area']; ?></td>
-                        <td><?php echo $s['permasalahan']; ?></td>
-                        <td><?php echo $s['request_by']; ?></td>
+                        <td> <?php echo $d['id_work_order']; ?> </td>
+                        <td> <?php echo $d['grup']; ?> (<?php echo $d['area']; ?>) </td>
+                        <td><?php echo $d['permasalahan']; ?> (<?php echo $d['bagian_teknisi']; ?>)</td>
+                        <td><?php echo $d['alasan']; ?></td>
                     </tr>
                 <?php $no++;
                 endforeach; ?>
